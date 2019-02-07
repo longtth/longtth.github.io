@@ -88,7 +88,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/dkm-hexo/" data-id="cjruk7qx10004jsvylnekdm8o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/dkm-hexo/" data-id="cjrumho8500052gvyxlb5h7ad" class="article-share-link">Share</a>
       
       
     </footer>
@@ -98,10 +98,10 @@
 
 
   
-    <article id="post-Chao-mung-den-voi-hexo" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-deploy-aspnet-web-using-WebDeploy-in-VisualStudio" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/07/Chao-mung-den-voi-hexo/" class="article-date">
-  <time datetime="2019-02-07T11:46:18.000Z" itemprop="datePublished">2019-02-07</time>
+    <a href="/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/" class="article-date">
+  <time datetime="2019-02-07T11:15:11.675Z" itemprop="datePublished">2019-02-07</time>
 </a>
     
   </div>
@@ -112,7 +112,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/07/Chao-mung-den-voi-hexo/">Chào mừng đến với hexo</a>
+      <a class="article-title" href="/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/">Deploy asp.net website bằng WebDeploy trong Visual Studio 2017</a>
     </h1>
   
 
@@ -120,13 +120,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Bên đội dev web bằng PHP (Wordpress) các thứ thì thường dùng FTP (FTPS/SFTP) để deploy web,  <a href="http://asp.net/" target="_blank" rel="noopener">asp.net</a>  web cũng có thể deploy bằng FTP được, tuy nhiên, với truyền thống  <em>eat your own s*</em>  của mình, các bạn Microsoft vẫn chế cho Visual Studio 1 phương thức “chính thống” để deploy web đó là  <code>Web Deploy</code>, ngoài việc deploy bằng cách “chép file” như các trình deploy trên nền FTP, WebDeploy còn hỗ trợ deploy trực tiếp lên SQL Server trong 1 click, tham khảo  <a href="http://localhost:4000/1" target="_blank" rel="noopener">link này</a>  để biết thêm chi tiết.</p>
+<p>Trong bài này mình sẽ hướng dẫn cách deploy cái web đơn giản không có SQL Server trước,</p>
+<h3 id="Nguyen-lieu"><a href="#Nguyen-lieu" class="headerlink" title="Nguyên liệu"></a>Nguyên liệu</h3><ul>
+<li>Dev environment:</li>
+<li>Visual studio 2017</li>
+<li>Code của 1 cái  <a href="http://asp.net/" target="_blank" rel="noopener">asp.net</a>  website đã chạy được :)</li>
+<li>Nếu bạn làm việc ở công ty thì cần: Quyền remote, kết nối được qua port 80, 443, và remote (3389) đến server, nếu làm ở web server cá nhân (thường mở full port) thì không cần care.</li>
+<li>Server:</li>
+<li>Windows server 2012 R2 / Windows server 2016 (bản WinServer2008 cũng không sao nhưng bây giờ đã là năm 2019 rồi mà :( )</li>
+</ul>
+<h3 id="Cac-buoc-thuc-hien"><a href="#Cac-buoc-thuc-hien" class="headerlink" title="Các bước thực hiện:"></a>Các bước thực hiện:</h3><p>Remote vào server, tạo 1 cái local account, add nó vào group Administrators  </p>
+<p>vì cái server có lúc thì sẽ cùng domain với PC của bạn, có lúc thì không, cho nên tốt nhất là nên dùng  <code>local-administrator-account</code>  cho việc này. Trong ví dụ này mình dùng chính cái account có tên là  <code>Administrator</code>  luôn.<br>Cài đặt các Component để run được web trên server thông qua Server Manager, tham khảo  <a href="http://localhost:4000/2" target="_blank" rel="noopener">ở đây</a>  .<br>Hình ảnh:<a href="https://i.imgur.com/EnBJ0Cx.png" title="Imgur" target="_blank" rel="noopener"><img src="https://i.imgur.com/EnBJ0Cx.png" alt="Imgur"></a>Imgur<br>Download WebDeployTool  <a href="http://localhost:4000/3" target="_blank" rel="noopener">link</a>  và install vào Server</p>
+<p>Bật VisualStudio, right-click vào project  <a href="http://asp.net/" target="_blank" rel="noopener">asp.net</a>, chọn Publish, xong chọn  <code>IIS, FTP, etc</code>  xong nhấn Create Profile  </p>
+<p><a href="https://i.imgur.com/IPHY6iT.png" target="_blank" rel="noopener">Imgur</a></p>
+<p>setting như sau:  </p>
+<p>Publish method: Web Deploy  </p>
+<p>Server:  <a href="http://1.2.3.4/" target="_blank" rel="noopener">http://1.2.3.4</a>  (IP của server của bạn)<br>Site name: Default Web Site (iis tự tạo cho bạn 1 cái site tên  <em>Default Web Site</em>  trong  <code>C:\inetpub\wwwroot</code>  có thể trực tiếp dùng cái này hoặc tự tạo site khác, tùy nhu cầu).<br>User name:  <code>Administrator</code>  (như đã tạo lúc nãy)<br>Password:  <strong>*</strong>  :)<br>Destination URL:  <a href="http://1.2.3.4/" target="_blank" rel="noopener">http://1.2.3.4</a>  </p>
+<p><a href="https://i.imgur.com/zjlzMvZ.png" title="Imgur" target="_blank" rel="noopener"><img src="https://i.imgur.com/zjlzMvZ.png" alt="Imgur"></a>Imgur</p>
+<p>save lại và bấm  <code>Publish</code>  thôi,  </p>
+<p><a href="https://i.imgur.com/L32siIQ.png" title="Imgur" target="_blank" rel="noopener"><img src="https://i.imgur.com/L32siIQ.png" alt="Imgur"></a>Imgur</p>
+<p>Nếu không có vấn đề gì xảy ra, Visual Studio sẽ báo:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2&gt;Web App was published successfully http://10.133.165.186/========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==================== Publish: 1 succeeded, 0 failed, 0 skipped ==========</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Written with  <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.  </p>
+<p>[1]  <a href="https://docs.microsoft.com/en-us/iis/publish/using-web-deploy/introduction-to-web-deploy" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/iis/publish/using-web-deploy/introduction-to-web-deploy</a>  </p>
+<p>[2]<a href="https://jakeydocs.readthedocs.io/en/latest/publishing/iis.html" target="_blank" rel="noopener">https://jakeydocs.readthedocs.io/en/latest/publishing/iis.html</a>  </p>
+<p>[3]<a href="https://www.iis.net/downloads/microsoft/web-deploy" target="_blank" rel="noopener">https://www.iis.net/downloads/microsoft/web-deploy</a></p>
+</blockquote>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.</p>
+</blockquote>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/Chao-mung-den-voi-hexo/" data-id="cjruk7qwu0002jsvyxw5jqf7r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/" data-id="cjrumho7w00042gvy9jtkstah" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#,</a></li></ul>
+
     </footer>
   </div>
   
@@ -163,67 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/ssh-trong-windows/" data-id="cjruk7qx40006jsvywkqhdrno" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-deploy-aspnet-web-using-WebDeploy-in-VisualStudio" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/" class="article-date">
-  <time datetime="2019-02-07T11:15:11.675Z" itemprop="datePublished">2019-02-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<hr>
-<p></p><h1 id="deploy-asp.net-website-bằng-webdeploy-trong-visual-studio-2017">Deploy <a href="http://asp.net" target="_blank" rel="noopener">asp.net</a> website bằng WebDeploy trong Visual Studio 2017</h1><p></p>
-<p></p><p>Bên đội dev web bằng PHP (Wordpress) các thứ thì thường dùng FTP (FTPS/SFTP) để deploy web, <a href="http://asp.net" target="_blank" rel="noopener">asp.net</a> web cũng có thể deploy bằng FTP được, tuy nhiên, với truyền thống <em>eat your own s*</em> của mình, các bạn Microsoft vẫn chế cho Visual Studio 1 phương thức “chính thống” để deploy web đó là <code>Web Deploy</code>, ngoài việc deploy bằng cách “chép file” như các trình deploy trên nền FTP, WebDeploy còn hỗ trợ deploy trực tiếp lên SQL Server trong 1 click, tham khảo <a href="1">link này</a> để biết thêm chi tiết.</p><p></p>
-<p></p><p>Trong bài này mình sẽ hướng dẫn cách deploy cái web đơn giản không có SQL Server trước,</p><p></p>
-<p></p><h3 id="nguyên-liệu">Nguyên liệu</h3><p></p>
-<p><ol></ol></p>
-<p><li>Dev environment:</li></p>
-<p><ol></ol></p>
-<p><li>Visual studio 2017</li></p>
-<p><li>Code của 1 cái <a href="http://asp.net" target="_blank" rel="noopener">asp.net</a> website đã chạy được :)</li></p>
-<p><li>Nếu bạn làm việc ở công ty thì cần: Quyền remote, kết nối được qua port 80, 443, và remote (3389) đến server, nếu làm ở web server cá nhân (thường mở full port) thì không cần care.</li><br><br></p>
-<p><li>Server:</li></p>
-<p><ol></ol></p>
-<p><li>Windows server 2012 R2 / Windows server 2016 (bản WinServer2008 cũng không sao nhưng bây giờ đã là năm 2019 rồi mà :( )</li><br><br><br></p>
-<p></p><h3 id="các-bước-thực-hiện">Các bước thực hiện:</h3><p></p>
-<p><ol></ol></p>
-<p><li></li></p>
-<p></p><p>Remote vào server, tạo 1 cái local account, add nó vào group Administrators<br><br>vì cái server có lúc thì sẽ cùng domain với PC của bạn, có lúc thì không, cho nên tốt nhất là nên dùng <code>local-administrator-account</code> cho việc này. Trong ví dụ này mình dùng chính cái account có tên là <code>Administrator</code> luôn.</p><br><p></p>
-<p><li></li></p>
-<p></p><p>Cài đặt các Component để run được web trên server thông qua Server Manager, tham khảo <a href="2">ở đây</a>  .<br><br>Hình ảnh: <img src="https://i.imgur.com/EnBJ0Cx.png" alt="Imgur"></p><br><p></p>
-<p><li></li></p>
-<p></p><p>Download WebDeployTool <a href="3">link</a> và install vào Server</p><br><p></p>
-<p><li></li></p>
-<p></p><p>Bật VisualStudio, right-click vào project <a href="http://asp.net" target="_blank" rel="noopener">asp.net</a>, chọn Publish, xong chọn <code>IIS, FTP, etc</code> xong nhấn Create Profile<br><br><a href="https://i.imgur.com/IPHY6iT.png" target="_blank" rel="noopener">Imgur</a></p><br><p></p>
-<p><li></li></p>
-<p></p><p>setting như sau:<br><br>Publish method: Web Deploy<br><br>Server: <a href="http://1.2.3.4" target="_blank" rel="noopener">http://1.2.3.4</a> (IP của server của bạn)<br><br>Site name: Default Web Site (iis tự tạo cho bạn 1 cái site tên <em>Default Web Site</em> trong <code>C:\inetpub\wwwroot</code> có thể trực tiếp dùng cái này hoặc tự tạo site khác, tùy nhu cầu).<br><br>User name: <code>Administrator</code> (như đã tạo lúc nãy)<br><br>Password: <strong>*</strong> :)<br><br>Destination URL: <a href="http://1.2.3.4" target="_blank" rel="noopener">http://1.2.3.4</a><br><br><img src="https://i.imgur.com/zjlzMvZ.png" alt="Imgur"></p><br><p></p>
-<p><li></li></p>
-<p></p><p>save lại và bấm <code>Publish</code> thôi,<br><br><img src="https://i.imgur.com/L32siIQ.png" alt="Imgur"></p><br><p></p>
-<p><li></li></p>
-<p></p><p>Nếu không có vấn đề gì xảy ra, Visual Studio sẽ báo:</p><br><br><p></p>
-<p><pre><code> 2&gt;Web App was published successfully <a href="http://10.133.165.186/" target="_blank" rel="noopener">http://10.133.165.186/</a><br>========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========<br>========== Publish: 1 succeeded, 0 failed, 0 skipped ==========<br></code></pre></p>
-<blockquote><br><p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.<br><br>[1] <a href="https://docs.microsoft.com/en-us/iis/publish/using-web-deploy/introduction-to-web-deploy" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/iis/publish/using-web-deploy/introduction-to-web-deploy</a><br><br>[2]<a href="https://jakeydocs.readthedocs.io/en/latest/publishing/iis.html" target="_blank" rel="noopener">https://jakeydocs.readthedocs.io/en/latest/publishing/iis.html</a><br><br>[3]<a href="https://www.iis.net/downloads/microsoft/web-deploy" target="_blank" rel="noopener">https://www.iis.net/downloads/microsoft/web-deploy</a></p><br></blockquote>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/" data-id="cjruk7qx80009jsvydwz4zlnb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/ssh-trong-windows/" data-id="cjrumho8700062gvyi3lu80nw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -253,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/20180606_Moi truong lam viec o Vietnam My va Trung Quoc/" data-id="cjruk7qwi0000jsvy0ry55iu5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/20180606_Moi truong lam viec o Vietnam My va Trung Quoc/" data-id="cjrumho7800002gvy1oqzmwik" class="article-share-link">Share</a>
       
       
     </footer>
@@ -292,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/07/2019-02-05-ssh-trong-windows/" data-id="cjruk7qx30005jsvy0rjs6zsn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/07/2019-02-05-ssh-trong-windows/" data-id="cjrumho7s00022gvymjd9y3q5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -312,44 +285,11 @@
   <div class="article-inner">
     
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p></p><p>Vì đọc <a href="1">bài này</a> nên tự nhiên nghĩ đến static method (class method) &amp; normal method (instance method) trong C#. Vậy nên viết cái này<br><br>Không giống Ruby, trong C# thì class method và instance method không đa hình, nghĩa là nếu viết như này:</p><p></p>
-<p><pre class=" language-cs"><code class="prism  language-cs">    public class Animal<br>    {<br>        public static void Hello()<br>        {<br>        }<br>        public void Hello()<br>        {<br>        }<br>    }<br></code></pre></p>
-<p></p><p>Các bạn sẽ bị lỗi:</p><p></p>
-<blockquote><br><p><code>CS0111</code>    Type ‘Animal’ already defines a member called ‘Hello’ with the same parameter types</p><br></blockquote><br><p>Còn khi gọi, thì cũng giống Ruby, static method không thể được gọi từ 1 <code>instance</code> mà phải gọi từ class</p><br><pre class=" language-cs"><code class="prism  language-cs">class Program<br>    {<br>        static void Main(string[] args)<br>        {<br>            Animal a = new Animal();<br>            Animal.Hello();<br>            a.Hello();  //Error: CS0176<br>            a.HelloHuman();<br>        }<br>    }<br></code></pre><br><blockquote><br><p><code>CS0176</code> Member ‘Animal.Hello()’ cannot be accessed with an instance reference; qualify it with a type name instead</p><br></blockquote><br><blockquote><br><p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.</p><br></blockquote>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Class method and instance method trong C#/" data-id="cjruk7qwr0001jsvyaptmctnz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#,</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-~bloghexo-dirsource_postsChao-mung-den-voi-hexo" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2013/07/13/~bloghexo-dirsource_postsChao-mung-den-voi-hexo/" class="article-date">
-  <time datetime="2013-07-13T13:46:25.000Z" itemprop="datePublished">2013-07-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2013/07/13/~bloghexo-dirsource_postsChao-mung-den-voi-hexo/">Hello World</a>
+      <a class="article-title" href="/2018/06/19/Class method and instance method trong C#/">Class method của Ruby trong C#</a>
     </h1>
   
 
@@ -357,14 +297,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Thử nghiệm viết blog bằng hexo, hơi bị phiền phức xíu xíu. </p>
+        <p>Vì đọc  <a href="http://localhost:4000/1" target="_blank" rel="noopener">bài này</a>  nên tự nhiên nghĩ đến static method (class method) &amp; normal method (instance method) trong C#. Vậy nên viết cái này  </p>
+<p>Không giống Ruby, trong C# thì class method và instance method không đa hình, nghĩa là nếu viết như này:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span>    </span><br><span class="line">&#123;        </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Hello</span>(<span class="params"></span>)        </span></span><br><span class="line"><span class="function"></span>	&#123;        &#125;        </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Hello</span>(<span class="params"></span>)        </span></span><br><span class="line"><span class="function"></span>	&#123;        &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Các bạn sẽ bị lỗi:</p>
+<blockquote>
+<p><code>CS0111</code>  Type ‘Animal’ already defines a member called ‘Hello’ with the same parameter types</p>
+</blockquote>
+<p>Còn khi gọi, thì cũng giống Ruby, static method không thể được gọi từ 1  <code>instance</code>  mà phải gọi từ class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Program</span>    </span><br><span class="line">&#123;        </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)        </span></span><br><span class="line"><span class="function"></span>    &#123;           </span><br><span class="line">		Animal a = <span class="keyword">new</span> Animal();</span><br><span class="line">		Animal.Hello();            </span><br><span class="line">		a.Hello();  <span class="comment">//Error: CS0176            </span></span><br><span class="line">		a.HelloHuman();        </span><br><span class="line">	&#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>CS0176</code>  Member ‘Animal.Hello()’ cannot be accessed with an instance reference; qualify it with a type name instead</p>
+</blockquote>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.</p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2013/07/13/~bloghexo-dirsource_postsChao-mung-den-voi-hexo/" data-id="cjruk7qx60008jsvyze8rvqxx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Class method and instance method trong C#/" data-id="cjrumho7f00012gvyl87axfb4" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#,</a></li></ul>
+
     </footer>
   </div>
   
@@ -404,7 +360,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
     </div>
   </div>
 
@@ -421,7 +377,7 @@
           </li>
         
           <li>
-            <a href="/2019/02/07/Chao-mung-den-voi-hexo/">Chào mừng đến với hexo</a>
+            <a href="/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/">Deploy asp.net website bằng WebDeploy trong Visual Studio 2017</a>
           </li>
         
           <li>
@@ -429,11 +385,11 @@
           </li>
         
           <li>
-            <a href="/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/">(no title)</a>
+            <a href="/2019/02/07/20180606_Moi truong lam viec o Vietnam My va Trung Quoc/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2019/02/07/20180606_Moi truong lam viec o Vietnam My va Trung Quoc/">(no title)</a>
+            <a href="/2019/02/07/2019-02-05-ssh-trong-windows/">(no title)</a>
           </li>
         
       </ul>

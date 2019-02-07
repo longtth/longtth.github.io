@@ -5,20 +5,20 @@
   
 
   
-  <title>Học tập như hít thở khí trời</title>
+  <title>Class method của Ruby trong C# | Học tập như hít thở khí trời</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Vì đọc bài này nên tự nhiên nghĩ đến static method (class method) &amp;amp; normal method (instance method) trong C#. Vậy nên viết cái nàyKhông giống Ruby, trong C# thì class method và instance method khô">
+  <meta name="description" content="Vì đọc  bài này  nên tự nhiên nghĩ đến static method (class method) &amp;amp; normal method (instance method) trong C#. Vậy nên viết cái này   Không giống Ruby, trong C# thì class method và instance metho">
 <meta name="keywords" content="C#,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Học tập như hít thở khí trời">
+<meta property="og:title" content="Class method của Ruby trong C#">
 <meta property="og:url" content="http://yoursite.com/2018/06/19/Class method and instance method trong C#/index.html">
 <meta property="og:site_name" content="Học tập như hít thở khí trời">
-<meta property="og:description" content="Vì đọc bài này nên tự nhiên nghĩ đến static method (class method) &amp;amp; normal method (instance method) trong C#. Vậy nên viết cái nàyKhông giống Ruby, trong C# thì class method và instance method khô">
+<meta property="og:description" content="Vì đọc  bài này  nên tự nhiên nghĩ đến static method (class method) &amp;amp; normal method (instance method) trong C#. Vậy nên viết cái này   Không giống Ruby, trong C# thì class method và instance metho">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-07T11:15:11.661Z">
+<meta property="og:updated_time" content="2019-02-07T13:15:08.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Học tập như hít thở khí trời">
-<meta name="twitter:description" content="Vì đọc bài này nên tự nhiên nghĩ đến static method (class method) &amp;amp; normal method (instance method) trong C#. Vậy nên viết cái nàyKhông giống Ruby, trong C# thì class method và instance method khô">
+<meta name="twitter:title" content="Class method của Ruby trong C#">
+<meta name="twitter:description" content="Vì đọc  bài này  nên tự nhiên nghĩ đến static method (class method) &amp;amp; normal method (instance method) trong C#. Vậy nên viết cái này   Không giống Ruby, trong C# thì class method và instance metho">
   
     <link rel="alternate" href="/atom.xml" title="Học tập như hít thở khí trời" type="application/atom+xml">
   
@@ -75,18 +75,38 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Class method của Ruby trong C#
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p></p><p>Vì đọc <a href="1">bài này</a> nên tự nhiên nghĩ đến static method (class method) &amp; normal method (instance method) trong C#. Vậy nên viết cái này<br><br>Không giống Ruby, trong C# thì class method và instance method không đa hình, nghĩa là nếu viết như này:</p><p></p>
-<p><pre class=" language-cs"><code class="prism  language-cs">    public class Animal<br>    {<br>        public static void Hello()<br>        {<br>        }<br>        public void Hello()<br>        {<br>        }<br>    }<br></code></pre></p>
-<p></p><p>Các bạn sẽ bị lỗi:</p><p></p>
-<blockquote><br><p><code>CS0111</code>    Type ‘Animal’ already defines a member called ‘Hello’ with the same parameter types</p><br></blockquote><br><p>Còn khi gọi, thì cũng giống Ruby, static method không thể được gọi từ 1 <code>instance</code> mà phải gọi từ class</p><br><pre class=" language-cs"><code class="prism  language-cs">class Program<br>    {<br>        static void Main(string[] args)<br>        {<br>            Animal a = new Animal();<br>            Animal.Hello();<br>            a.Hello();  //Error: CS0176<br>            a.HelloHuman();<br>        }<br>    }<br></code></pre><br><blockquote><br><p><code>CS0176</code> Member ‘Animal.Hello()’ cannot be accessed with an instance reference; qualify it with a type name instead</p><br></blockquote><br><blockquote><br><p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.</p><br></blockquote>
-
+        <p>Vì đọc  <a href="http://localhost:4000/1" target="_blank" rel="noopener">bài này</a>  nên tự nhiên nghĩ đến static method (class method) &amp; normal method (instance method) trong C#. Vậy nên viết cái này  </p>
+<p>Không giống Ruby, trong C# thì class method và instance method không đa hình, nghĩa là nếu viết như này:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Animal</span>    </span><br><span class="line">&#123;        </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Hello</span>(<span class="params"></span>)        </span></span><br><span class="line"><span class="function"></span>	&#123;        &#125;        </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Hello</span>(<span class="params"></span>)        </span></span><br><span class="line"><span class="function"></span>	&#123;        &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Các bạn sẽ bị lỗi:</p>
+<blockquote>
+<p><code>CS0111</code>  Type ‘Animal’ already defines a member called ‘Hello’ with the same parameter types</p>
+</blockquote>
+<p>Còn khi gọi, thì cũng giống Ruby, static method không thể được gọi từ 1  <code>instance</code>  mà phải gọi từ class</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Program</span>    </span><br><span class="line">&#123;        </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>)        </span></span><br><span class="line"><span class="function"></span>    &#123;           </span><br><span class="line">		Animal a = <span class="keyword">new</span> Animal();</span><br><span class="line">		Animal.Hello();            </span><br><span class="line">		a.Hello();  <span class="comment">//Error: CS0176            </span></span><br><span class="line">		a.HelloHuman();        </span><br><span class="line">	&#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>CS0176</code>  Member ‘Animal.Hello()’ cannot be accessed with an instance reference; qualify it with a type name instead</p>
+</blockquote>
+<blockquote>
+<p>Written with <a href="https://stackedit.io/" target="_blank" rel="noopener">StackEdit</a>.</p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/19/Class method and instance method trong C#/" data-id="cjruk7qwr0001jsvyaptmctnz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/19/Class method and instance method trong C#/" data-id="cjrumho7f00012gvyl87axfb4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C#,</a></li></ul>
@@ -106,11 +126,6 @@
       </div>
     </a>
   
-  
-    <a href="/2013/07/13/~bloghexo-dirsource_postsChao-mung-den-voi-hexo/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
   
 </nav>
 
@@ -147,7 +162,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
     </div>
   </div>
 
@@ -164,7 +179,7 @@
           </li>
         
           <li>
-            <a href="/2019/02/07/Chao-mung-den-voi-hexo/">Chào mừng đến với hexo</a>
+            <a href="/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/">Deploy asp.net website bằng WebDeploy trong Visual Studio 2017</a>
           </li>
         
           <li>
@@ -172,11 +187,11 @@
           </li>
         
           <li>
-            <a href="/2019/02/07/deploy-aspnet-web-using-WebDeploy-in-VisualStudio/">(no title)</a>
+            <a href="/2019/02/07/20180606_Moi truong lam viec o Vietnam My va Trung Quoc/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2019/02/07/20180606_Moi truong lam viec o Vietnam My va Trung Quoc/">(no title)</a>
+            <a href="/2019/02/07/2019-02-05-ssh-trong-windows/">(no title)</a>
           </li>
         
       </ul>
