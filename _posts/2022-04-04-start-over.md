@@ -6,3 +6,5 @@ categories: jekyll update
 ---
 
 Bỏ đi hết ta làm lại từ đầu 🤣 again 🤣
+
+![](/images/can-we-start-over-quote-1.jpg)
